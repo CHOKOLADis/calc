@@ -1,0 +1,109 @@
+*{
+    transition: .3s;
+    margin: 0;
+    padding: 0;
+    font-family: "RockStar", Geneva, Tahoma, sans-serif;
+}
+
+$btnBG: #297fb91c;
+$btnBGActive: #297fb97a;
+$btnNumBG: rgba(219, 219, 219, 0.315);;
+$btnNumBGActive: rgba(219, 219, 219, 0.089);
+
+
+.container{
+    width: 85%;
+    margin: 0px auto;
+    
+}
+.d-flex{
+    display: flex;
+}
+
+header{
+    
+    color: white;
+    padding: 30px 0px;
+    background: linear-gradient(149deg, #2980B9 0%, #c6ffdd 42%, #fbd786 72%, #f7797d 100% );
+    background-size: 400%;
+    animation: gradient 10s infinite linear;
+
+    h2{
+        font-family: 'Merkur Cyrillic', sans-serif !important;
+        font-size: 40px;
+        text-shadow: 0px 2px 5px silver;
+        text-align: center;
+    }
+}
+
+.calc{
+    width: 65%;
+    margin: 0px auto;
+    margin-top: 3%;
+    box-shadow: 2px 3px 6px silver;
+
+    font-size: 30px;
+    .result{
+        text-align: right;
+        color: white;
+        padding: 20px;
+        background: linear-gradient(120deg,  #0f2027, #203a43, #2c5364 );
+    }
+    .buttons{
+        margin: 2px;
+    }
+    .row_btns{
+
+        // justify-content: space-between;
+        .btn{
+            width: 22%;
+            padding: 2%;
+            margin: 2px;
+            align-items: center;
+            display: flex;
+            justify-content: center;
+            height: fit-content;
+            background: $btnBG;
+            cursor: pointer;
+            
+            img{
+                width: 38px;
+            }
+
+            &:hover{
+                background: $btnBGActive;
+            }
+            &.num{
+                background: $btnNumBG;
+                &:hover{
+                    background: $btnNumBGActive;
+                }
+            }
+
+        }
+    }
+   
+}
+
+footer{
+    margin-top: 60px;
+
+    .stocks{
+        display: flex;
+        flex-direction: column;
+    }
+}
+
+
+
+@keyframes gradient {
+    0% {
+        background-position: 80% 0%;
+    }
+    50% {
+        background-position: 20% 100%;
+    }
+    100% {
+        background-position: 80% 0%;
+    }
+}

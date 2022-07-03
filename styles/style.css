@@ -1,0 +1,119 @@
+* {
+		-webkit-transition: 0.3s;
+		transition: 0.3s;
+		margin: 0;
+		padding: 0;
+		font-family: "RockStar", Geneva, Tahoma, sans-serif;
+}
+
+.container {
+		width: 85%;
+		margin: 0px auto;
+}
+
+.d-flex {
+		display: -webkit-box;
+		display: -ms-flexbox;
+		display: flex;
+}
+
+header {
+		color: white;
+		padding: 30px 0px;
+		background: linear-gradient(149deg, #2980B9 0%, #c6ffdd 42%, #fbd786 72%, #f7797d 100%);
+		background-size: 400%;
+		-webkit-animation: gradient 10s infinite linear;
+		        animation: gradient 10s infinite linear;
+}
+header h2 {
+		font-family: "Merkur Cyrillic", sans-serif !important;
+		font-size: 40px;
+		text-shadow: 0px 2px 5px silver;
+		text-align: center;
+}
+
+.calc {
+		width: 65%;
+		margin: 0px auto;
+		margin-top: 3%;
+		-webkit-box-shadow: 2px 3px 6px silver;
+		        box-shadow: 2px 3px 6px silver;
+		font-size: 30px;
+}
+.calc .result {
+		text-align: right;
+		color: white;
+		padding: 20px;
+		background: linear-gradient(120deg, #0f2027, #203a43, #2c5364);
+}
+.calc .buttons {
+		margin: 2px;
+}
+.calc .row_btns .btn {
+		width: 22%;
+		padding: 2%;
+		margin: 2px;
+		-webkit-box-align: center;
+		    -ms-flex-align: center;
+		        align-items: center;
+		display: -webkit-box;
+		display: -ms-flexbox;
+		display: flex;
+		-webkit-box-pack: center;
+		    -ms-flex-pack: center;
+		        justify-content: center;
+		height: -webkit-fit-content;
+		height: -moz-fit-content;
+		height: fit-content;
+		background: rgba(41, 127, 185, 0.1098039216);
+		cursor: pointer;
+}
+.calc .row_btns .btn img {
+		width: 38px;
+}
+.calc .row_btns .btn:hover {
+		background: rgba(41, 127, 185, 0.4784313725);
+}
+.calc .row_btns .btn.num {
+		background: rgba(219, 219, 219, 0.315);
+}
+.calc .row_btns .btn.num:hover {
+		background: rgba(219, 219, 219, 0.089);
+}
+
+footer {
+		margin-top: 60px;
+}
+footer .stocks {
+		display: -webkit-box;
+		display: -ms-flexbox;
+		display: flex;
+		-webkit-box-orient: vertical;
+		-webkit-box-direction: normal;
+		    -ms-flex-direction: column;
+		        flex-direction: column;
+}
+
+@-webkit-keyframes gradient {
+		0% {
+				background-position: 80% 0%;
+		}
+		50% {
+				background-position: 20% 100%;
+		}
+		100% {
+				background-position: 80% 0%;
+		}
+}
+
+@keyframes gradient {
+		0% {
+				background-position: 80% 0%;
+		}
+		50% {
+				background-position: 20% 100%;
+		}
+		100% {
+				background-position: 80% 0%;
+		}
+}
