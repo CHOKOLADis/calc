@@ -1,6 +1,14 @@
 
 class calc {
 
+    allNum = $('.num');
+    s_plus = $('#plus');
+    fullClear = $('#fullClear');
+    delLast = $('#delLast');
+
+    print = 0;
+    lastSymbolNum = true;
+
     constructor(){
         
     } 
@@ -10,15 +18,26 @@ class calc {
         const save = $('.result').text();
 
         if (save == 0) {
-            $('.result').text(num.text());
+            this.printResult(num.text());
         } else {
-            $('.result').text(save+num.text());
+            this.printResult(save+num.text());
         }
     }
 
-    plus(num,add){
+    plus(){
 
-        (add) ? res = num + add : res = num + 1;
+        let res = '';
+        let data = $('.result').text();
+
+        if (this.lastSymbolNum) {
+            this.print = data + '+';
+            this.lastSymbolNum = false;
+        } else{
+            this.print = this.equality(data) + '+';
+            this.lastSymbolNum = false;
+        }
+
+        this.printResult(this.print);
         return res;
     }
 
@@ -42,10 +61,15 @@ class calc {
      
     equality(equalStr){
 
+        console.log(equalStr);
         let [num1, sign, num2] = equalStr.split(/([\+\-\*\/])/);
         console.log([num1, sign, num2]);
+
+        if ([num2] == null){
+            return [num1];
+        }
+
         [num1, num2] = [+num1, +num2];
-        console.log([num1, sign, num2]);
 
         let result = null;
 
@@ -67,10 +91,6 @@ class calc {
         return result;
     }
 
-    fullClear(){
-        $('.result').text(0);
-    }
-
     delLast(){
         
         let save = $('.result').text();
@@ -82,27 +102,18 @@ class calc {
         }
         
     }
+
+    printResult(data){
+        $('.result').text(data);
+    }
 }
 
 let calcObj = new calc();
 
-$(document).ready( function(){
+calcObj.allNum.on('click', function() { calcObj.numClick($(this)); });
 
-    $('.num').on('click',function(){
-      
-        calcObj.numClick($(this));
+calcObj.s_plus.on('click', () => { calcObj.plus(); });
 
-    });
+calcObj.fullClear.on('click', () => { calcObj.printResult(0); });
 
-    $('#fullClear').on('click',function(){
-      
-        calcObj.fullClear();
-
-    });
-
-    $('#delLast').on('click',function(){
-      
-        calcObj.delLast();
-
-    });
-});
+calcObj.delLast.on('click', () => { calcObj.delLast(); });
