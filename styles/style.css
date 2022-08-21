@@ -46,6 +46,10 @@ header h2 {
 		padding: 20px;
 		background: linear-gradient(120deg, #0f2027, #203a43, #2c5364);
 }
+.calc .result .history {
+		font-size: 16px;
+		color: rgba(219, 219, 219, 0.315);
+}
 .calc .buttons {
 		margin: 2px;
 }

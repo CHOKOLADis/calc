@@ -48,6 +48,11 @@ header{
         color: white;
         padding: 20px;
         background: linear-gradient(120deg,  #0f2027, #203a43, #2c5364 );
+
+        .history{
+            font-size: 16px;
+            color: $btnNumBG;
+        }
     }
     .buttons{
         margin: 2px;

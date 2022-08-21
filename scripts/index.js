@@ -3,8 +3,12 @@ class calc {
 
     allNum = $('.num');
     s_plus = $('#plus');
+    s_minus = $('#minus');
+    s_multiply = $('#multiply');
+    s_divide = $('#divide');
+    s_equal = $('#equal');
     fullClear = $('#fullClear');
-    delLast = $('#delLast');
+    s_delLast = $('#delLast');
 
     print = 0;
     lastSymbolNum = true;
@@ -15,54 +19,51 @@ class calc {
 
     numClick(num){
 
-        const save = $('.result').text();
+        const save = $('#res').text();
 
         if (save == 0) {
             this.printResult(num.text());
         } else {
             this.printResult(save+num.text());
         }
+
+        this.lastSymbolNum = true;
     }
 
-    plus(){
+    defAction(operation){
 
         let res = '';
-        let data = $('.result').text();
+        let data = $('#res').text();
 
         if (this.lastSymbolNum) {
-            this.print = data + '+';
+
+            this.print = data + `${operation}`;
             this.lastSymbolNum = false;
+
+            if (this.checkOn2Vars()){
+                this.print = this.equality(data) + `${operation}`;
+                this.lastSymbolNum = false;
+            }
+
         } else{
-            this.print = this.equality(data) + '+';
+
+            return false;
             this.lastSymbolNum = false;
         }
 
         this.printResult(this.print);
         return res;
+
     }
-
-    minus(num,sub){
-
-        (sub) ? res = num + sub : res = num + 1;
-        return res;
-    }
-
-    multiply(num,multy){
-
-        (multy) ? res = num + multy : res = num + 1;
-        return res;
-    }
-
-    divide(num,div){
-
-        (div) ? res = num + div : res = num + 1;
-        return res;
-    }
-     
+   
     equality(equalStr){
 
-        console.log(equalStr);
-        let [num1, sign, num2] = equalStr.split(/([\+\-\*\/])/);
+        let [num1, sign, num2] = equalStr.split(/([\+\-\×\/])/);
+        
+        if (equalStr != 0) {
+            this.history = equalStr;
+        }
+
         console.log([num1, sign, num2]);
 
         if ([num2] == null){
@@ -80,7 +81,7 @@ class calc {
             case '-':
             result = num1 - num2;
             break;
-            case '*':
+            case '×':
             result = num1 * num2;
             break;
             case '/':
@@ -92,19 +93,60 @@ class calc {
     }
 
     delLast(){
-        
-        let save = $('.result').text();
+
+        let save = $('#res').text();
 
         if (save.length == 1) {
-            $('.result').text(0);
+            $('#res').text(0);
         } else {
-            $('.result').text(save.slice(0, save.length-1));
+            $('#res').text(save.slice(0, save.length-1));
         }
+
+        this.checkLastSymbol();
         
     }
 
+    checkLastSymbol(){
+        
+        const text = $('#res').text();
+        const lastSymbol = text.split('').pop();
+        const regCheck = lastSymbol.split(/([\+\-\*\/])/);
+
+        if (regCheck.length>1){
+            this.lastSymbolNum = false;
+        } else {
+            this.lastSymbolNum = true;
+        }
+
+        return lastSymbol;
+    }
+
+    checkOn2Vars(){
+
+        const text = $('#res').text();
+        const items = text.split(/([\+\-\*\/])/);
+        
+        console.log(items.length);
+        if (items.length>1){
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     printResult(data){
-        $('.result').text(data);
+
+        
+        $('.history').text(this.history);
+        $('#res').text(data);
+
+        if (data === null || data == 0){
+
+            this.lastSymbolNum = true;
+            $('.history').text();
+            $('#res').text('0');
+        }
+        
     }
 }
 
@@ -112,8 +154,13 @@ let calcObj = new calc();
 
 calcObj.allNum.on('click', function() { calcObj.numClick($(this)); });
 
-calcObj.s_plus.on('click', () => { calcObj.plus(); });
+calcObj.s_plus.on('click', () => { calcObj.defAction('+'); });
+calcObj.s_minus.on('click', () => { calcObj.defAction('-'); });
+calcObj.s_multiply.on('click', () => { calcObj.defAction('×'); });
+calcObj.s_divide.on('click', () => { calcObj.defAction('/'); });
 
-calcObj.fullClear.on('click', () => { calcObj.printResult(0); });
+calcObj.s_equal.on('click', () => { calcObj.equality($('#res').text()); });
 
-calcObj.delLast.on('click', () => { calcObj.delLast(); });
+calcObj.fullClear.on('click', () => { calcObj.printResult('0'); });
+
+calcObj.s_delLast.on('click', () => { calcObj.delLast(); });
