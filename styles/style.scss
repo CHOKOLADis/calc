@@ -78,12 +78,13 @@ header{
             &:hover{
                 background: $btnBGActive;
             }
-            &.num{
+            &.num,&#plus_minus{
                 background: $btnNumBG;
                 &:hover{
                     background: $btnNumBGActive;
                 }
             }
+
 
         }
     }
