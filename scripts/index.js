@@ -64,52 +64,66 @@ class calc {
    
     equality(equalStr){
 
-        let [num1, sign, num2] = equalStr.split(/([\+\-\×\/])/);
+
+        let result = null;
+
+        if (equalStr.charAt(0) == '-'){
+            var [empty, sign1, num1, sign2, num2] = equalStr.split(/([\+\-\×\/])/);
+        } else {
+            var [num1, sign2, num2] = equalStr.split(/([\+\-\×\/])/);
+        }
+
+        
         
         if (equalStr != 0) {
             this.history = equalStr;
         }
 
-        console.log([num1, sign, num2]);
+        console.log([sign1,num1, sign2, num2]);
 
-        if ([num2] == null){
-            return [num1];
+        if (num2 == null || num2 == undefined){
+            result = sign1+num1;
+        } else {
+
+            if (sign1 != ''){
+                num1 = Number(sign1+''+num1);
+            }
+            [num1, num2] = [+num1, +num2];
+    
+            switch (sign2) {
+                case '+':
+                result = num1 + num2;
+                break;
+                case '-':
+                result = num1 - num2;
+                break;
+                case '×':
+                result = num1 * num2;
+                break;
+                case '/':
+                result = num1 / num2;
+                break;
+            }
         }
 
-        [num1, num2] = [+num1, +num2];
-
-        let result = null;
-
-        switch (sign) {
-            case '+':
-            result = num1 + num2;
-            break;
-            case '-':
-            result = num1 - num2;
-            break;
-            case '×':
-            result = num1 * num2;
-            break;
-            case '/':
-            result = num1 / num2;
-            break;
-        }
-
+        console.log(result);
         return result;
     }
 
     plus_minus(data){
-        if ( !this.checkOn2Vars(data) ){
+        
+        let num = data;
+        let retun_data = 0;
 
-            let num = $('#res').text();
-            Number(num);
-            if (num < 0) {
-                return Math.abs(num)
-            } else {
-                return -Math.abs(num)
-            }
-            
+        Number(data)
+
+        if (num < 0) {
+            retun_data = Math.abs(num);
+        } else {
+            retun_data = -Math.abs(num)
         }
+
+        this.printResult(retun_data);
     }
 
     delLast(){
@@ -191,7 +205,6 @@ calcObj.s_multiply.on('click', () => { calcObj.defAction('×'); });
 calcObj.s_divide.on('click', () => { calcObj.defAction('/'); });
 
 calcObj.s_plus_minus.on('click', () => { 
-    console.log(1);
     calcObj.plus_minus($('#res').text()); 
 });
 

@@ -78,12 +78,13 @@ header h2 {
 .calc .row_btns .btn:hover {
 		background: rgba(41, 127, 185, 0.4784313725);
 }
-.calc .row_btns .btn.num {
+.calc .row_btns .btn.num, .calc .row_btns .btn#plus_minus{
 		background: rgba(219, 219, 219, 0.315);
 }
-.calc .row_btns .btn.num:hover {
+.calc .row_btns .btn.num:hover, .calc .row_btns .btn#plus_minus:hover {
 		background: rgba(219, 219, 219, 0.089);
 }
+
 
 footer {
 		margin-top: 60px;
