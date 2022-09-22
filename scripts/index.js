@@ -6,6 +6,7 @@ class calc {
     s_minus = $('#minus');
     s_multiply = $('#multiply');
     s_divide = $('#divide');
+    s_sqrt = $('#sqrt'); 
 
     s_plus_minus = $('#plus_minus');
 
@@ -74,7 +75,6 @@ class calc {
         }
 
         
-        
         if (equalStr != 0) {
             this.history = equalStr;
         }
@@ -82,11 +82,14 @@ class calc {
         console.log([sign1,num1, sign2, num2]);
 
         if (num2 == null || num2 == undefined){
+            // console.log(12);
             result = sign1+num1;
         } else {
 
-            if (sign1 != ''){
+            // console.log(22);
+            if (sign1 != '' && sign1 != undefined ){
                 num1 = Number(sign1+''+num1);
+                // console.log(23);
             }
             [num1, num2] = [+num1, +num2];
     
@@ -106,16 +109,27 @@ class calc {
             }
         }
 
-        console.log(result);
+        // console.log(result);
         return result;
     }
 
     plus_minus(data){
         
+        if (this.checkOn2Vars(data)){
+
+            let check = this.isMinusNumber(data);
+            if ( check != ''){
+                data = check;
+            } else {
+                return false
+            }
+
+        };
+
         let num = data;
         let retun_data = 0;
 
-        Number(data)
+        Number(data);
 
         if (num < 0) {
             retun_data = Math.abs(num);
@@ -124,6 +138,29 @@ class calc {
         }
 
         this.printResult(retun_data);
+    }
+
+    sqrt_method(data){
+
+        let result = 0;
+
+        if (this.checkOn2Vars(data)){
+
+            let check = this.isMinusNumber(data);
+            if ( check != ''){                
+                result = Math.sqrt(check);
+            } else {
+                return false;
+            }
+
+        } else {
+            result = Math.sqrt(data);
+        }
+
+        this.history = '√'+data;
+
+        this.printResult(result);
+        return;
     }
 
     delLast(){
@@ -160,9 +197,20 @@ class calc {
         const text = data;
         const items = text.split(/([\+\-\*\/])/);
         
-        console.log(items.length);
-        if (items.length>1){
+        // console.log(items);
+        if (items.length>1){          
             return true;
+        } else {
+            return false;
+        }
+    }
+
+    isMinusNumber(data){
+        const text = data;
+        const items = text.split(/([\+\-\*\/])/);
+
+        if (items.length == 3 && items[0] == '' && items[1] == '-'){
+            return items[1]+''+items[2];
         } else {
             return false;
         }
@@ -170,6 +218,7 @@ class calc {
 
     printResult(data){
 
+        console.log(this.history);
         $('.history').text(this.history);
 
         // Округление 
@@ -203,6 +252,7 @@ calcObj.s_plus.on('click', () => { calcObj.defAction('+'); });
 calcObj.s_minus.on('click', () => { calcObj.defAction('-'); });
 calcObj.s_multiply.on('click', () => { calcObj.defAction('×'); });
 calcObj.s_divide.on('click', () => { calcObj.defAction('/'); });
+calcObj.s_sqrt.on('click', () => { calcObj.sqrt_method($('#res').text()); });
 
 calcObj.s_plus_minus.on('click', () => { 
     calcObj.plus_minus($('#res').text()); 
